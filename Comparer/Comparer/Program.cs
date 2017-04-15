@@ -18,7 +18,7 @@ namespace Comparer
         public static void CompareSolvers()
         {
             MazeGeneratorLib.DFSMazeGenerator generator = new MazeGeneratorLib.DFSMazeGenerator();
-            MazeLib.Maze maze = generator.Generate(15, 15);
+            MazeLib.Maze maze = generator.Generate(100, 100);
             Console.WriteLine(maze.ToString());
             MazeAdapter adapter = new MazeAdapter(maze);
             SearchAlgorithmsLib.Solution<MazeLib.Position> solBFS = new SearchAlgorithmsLib.Solution<MazeLib.Position>();
@@ -28,11 +28,11 @@ namespace Comparer
             SearchAlgorithmsLib.Solution<MazeLib.Position> solDFS = new SearchAlgorithmsLib.Solution<MazeLib.Position>();
             solDFS = dfs.search(adapter);
             Console.WriteLine("in BFS: {0}, in DFS: {1}", bfs.getNumberOfNodesEvaluated(), dfs.getNumberOfNodesEvaluated());
-            Console.WriteLine("Start: {0}, end: {1}", maze.InitialPos,maze.GoalPos);
+           /* Console.WriteLine("Start: {0}, end: {1}", maze.InitialPos,maze.GoalPos);
            Console.WriteLine("BFS solution: ");
             solBFS.printSolution();
             Console.WriteLine("DFS solution: ");
-            solDFS.printSolution();
+            solDFS.printSolution();*/
 
 
 
