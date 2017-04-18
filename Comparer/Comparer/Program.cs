@@ -18,8 +18,10 @@ namespace Comparer
         public static void CompareSolvers()
         {
             MazeGeneratorLib.DFSMazeGenerator generator = new MazeGeneratorLib.DFSMazeGenerator();
-            MazeLib.Maze maze = generator.Generate(100, 100);
-            Console.WriteLine(maze.ToString());
+            MazeLib.Maze maze = generator.Generate(10, 10);
+            // Console.WriteLine(maze.ToString());
+            string a = maze.ToJSON();
+            Console.WriteLine(a);
             MazeAdapter adapter = new MazeAdapter(maze);
             SearchAlgorithmsLib.Solution<MazeLib.Position> solBFS = new SearchAlgorithmsLib.Solution<MazeLib.Position>();
             SearchAlgorithmsLib.BFS<MazeLib.Position> bfs = new SearchAlgorithmsLib.BFS<MazeLib.Position>();

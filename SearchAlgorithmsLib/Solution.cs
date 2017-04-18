@@ -9,7 +9,8 @@ namespace SearchAlgorithmsLib
     public class Solution<T>
     {
 
-        List<State<T>> statesList { get; set; }
+       // private List<State<T>> statesList { get; set; }
+       private List<State<T>> statesList { get; set; }
 
         public Solution ()
         {
@@ -25,7 +26,13 @@ namespace SearchAlgorithmsLib
             {
                 Console.WriteLine(statesList.First().state.ToString());
                 statesList.RemoveAt(0);
+                
             }
         }
+        public List<State<T>> getStateList ()
+        {
+            return this.statesList;
+        }
+      
     }
 }
