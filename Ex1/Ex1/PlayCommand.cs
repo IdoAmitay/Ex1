@@ -10,15 +10,17 @@ namespace Ex1
    public class PlayCommand:ICommand
     {
         private IModel model;
-        private PlayCommand(IModel model)
+        public PlayCommand(IModel model)
         {
             this.model = model;
         }
 
-        public void ExecuteCommand(string[] args, TcpClient client = null)
+        public string ExecuteCommand(string[] args, TcpClient client = null)
         {
             int move = int.Parse(args[0]);
-            this.model.play(move, client);
+            return this.model.play(move, client);
         }
+
+        
     }
 }

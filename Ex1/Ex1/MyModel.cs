@@ -143,9 +143,10 @@ namespace Ex1
         }
 
       
-        public void play(int move, TcpClient client)
+        public string play(int move, TcpClient client)
         {
             /////////////////////////////////////////
+            return null;
         }
 
         public string Solve(string name, int algorithm)

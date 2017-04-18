@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace Ex1
 {
-    class ClientHandler : IClientHandler
+    class ClientHandler : IClientHandler, IView
     {
+        public void GetCommand(string s)
+        {
+            throw new NotImplementedException();
+        }
+
         public void HandleClient(TcpClient client)
         {
             
@@ -27,6 +32,11 @@ namespace Ex1
                 }
                 client.Close();
             }).Start();
+        }
+
+        public void ShowResult(string s)
+        {
+            throw new NotImplementedException();
         }
     }
 }

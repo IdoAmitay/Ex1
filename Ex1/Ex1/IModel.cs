@@ -16,8 +16,8 @@ namespace Ex1
         string Solve(string name, int algorithm);
         void Start(string name, int rows, int cols,TcpClient client);
         List<string> List();
-        void Join(string name, TcpClient client);
-        void play(int move,TcpClient client);
+        string Join(string name, TcpClient client);
+        string play(int move,TcpClient client);
         void close(string name);
 
     }
