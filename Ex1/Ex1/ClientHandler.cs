@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace Ex1
 {
-    class ClientHandler : IClientHandler, IView
+    class ClientHandler : IClientHandler
     {
-        public void GetCommand(string s)
+        private IView v;
+        public ClientHandler (IView v)
         {
-            throw new NotImplementedException();
+            this.v = v;
         }
+       
 
         public void HandleClient(TcpClient client)
         {
@@ -29,16 +31,14 @@ namespace Ex1
                 {
                     string commandLine = reader.ReadLine();
                     //Console.WriteLine("Got command: {0}", commandLine);
-                    string result = ExecuteCommand(commandLine, client);
-                    writer.Write(result);
+                    /*string result =*/
+                    this.v.GetCommand(commandLine, client);
+                    //writer.Write(result);
                 }
                 client.Close();
             }).Start();
         }
 
-        public void ShowResult(string s)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

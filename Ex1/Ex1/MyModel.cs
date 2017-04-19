@@ -40,13 +40,17 @@ namespace Ex1
         {
             this.searcher = searcher;
         }
-        public void Join(string nameOfGame, TcpClient client)
+        public bool Join(string nameOfGame, TcpClient client)
         {
+            List<TcpClient> clients = null ;
+            ISearchable<T> searchale = null;
              foreach (KeyValuePair<ISearchable<T>,string> key in gamesNames )
              {
                  if (key.Value.Equals(nameOfGame))
                  {
                      this.multiPlayerGame[key.Key].Add(client);
+                    clients = this.multiPlayerGame[key.Key];
+                    searchale = key.Key;
                      break;
                  }
              }
@@ -58,14 +62,21 @@ namespace Ex1
                     break;
                 }
             }*/
-            
+            if (clients.Count() > 1)
+            {
+                foreach (TcpClient c in clients)
+                {
+                    this.c.DataHasChanged(searchale.ToString(), c);
+                }
+            }
+            return true;
         }
        
         public void SetGenerator(MazeGeneratorLib.IMazeGenerator generator)
         {
             this.generator = generator;
         }
-        public string Generate(string name,int rows, int cols)
+        public bool Generate(string name,int rows, int cols, TcpClient client)
         {
             //SetGenerator(new MazeGeneratorLib.DFSMazeGenerator());
             /* MazeLib.Maze maze = this.generator.Generate(rows, cols);
@@ -88,8 +99,9 @@ namespace Ex1
             
             this.singleGameMaze.Add(searchable, null);
             this.gamesNames.Add(searchable, name);
-            return searchable.ToString();
-
+            // return searchable.ToString();
+            this.c.DataHasChanged(searchable.ToString(), client);
+            return false;
         }
         public ISearchable<T> CreateMaze(string name, int rows, int cols)
         {
@@ -99,7 +111,7 @@ namespace Ex1
 
         }
         
-        public void Start(string name,int rows,int cols, TcpClient client)
+        public bool Start(string name,int rows,int cols, TcpClient client)
         {
             /*MazeLib.Maze maze = this.generator.Generate(rows, cols);
             maze.Name = name;
@@ -111,24 +123,32 @@ namespace Ex1
             if (this.multiPlayerGame.ContainsKey(searchable))
             {
                 //this.singleGameMaze.Remove(adapter);
-                Console.WriteLine("Name exist");
+                // Console.WriteLine("");
+                this.c.DataHasChanged("Name exist", client);
+                return false;
 
             }
             else
             {
                 this.multiPlayerGame.Add(searchable, clients);
+                this.c.DataHasChanged(searchable.ToString(), client);
+                return true;
 
             }
 
         }
-        public List<string> List()
+        public bool /*List<string>*/ List(TcpClient client)
         {
-            List<string> games = new List<string>();
+            //List<string> games = new List<string>();
+            string gamesString = "";
             foreach (KeyValuePair<ISearchable<T>, List<TcpClient>> key in multiPlayerGame)
             {
-                games.Add(gamesNames[key.Key]);
+                //games.Add(gamesNames[key.Key]);
+                gamesString += gamesNames[key.Key] + "/n";
             }
-            return games;
+            //return games;
+            this.c.DataHasChanged(gamesString, client);
+            return false;
         }
         public ISearchable<T> getMazeByName(string name)
         {
@@ -143,17 +163,19 @@ namespace Ex1
         }
 
       
-        public string play(int move, TcpClient client)
+        public bool play(int move, TcpClient client)
         {
             /////////////////////////////////////////
-            return null;
+            return true;
         }
 
-        public string Solve(string name, int algorithm)
+        public bool Solve(string name, int algorithm, TcpClient client)
         {
             if (!gamesNames.ContainsValue(name))
             {
-                return "name doesn't exist";
+                // return "name doesn't exist";
+                this.c.DataHasChanged("name doesn't exist", client);
+            
             }
             else
             {
@@ -217,15 +239,34 @@ namespace Ex1
                 solutionObject["Name"] = name;
                 solutionObject["Solution"] = solutionStr; ;
                 solutionObject["NodesEvaluated"] = searcher.getNumberOfNodesEvaluated();
-                return solutionObject.ToString();
+                // return solutionObject.ToString();
+                this.c.DataHasChanged(solutionObject.ToString(), client);
 
             }
+            return false;
         }
 
-        public void close(string name)
+        public bool close(string name, TcpClient client)
         {
-            throw new NotImplementedException();
+            ISearchable<T> searchable = null;
+            foreach (KeyValuePair<ISearchable<T>,string> key in gamesNames )
+            {
+                if (key.Value.Equals(name))
+                {
+                    searchable = key.Key;
+                    break;
+                }
+            }
+            List<TcpClient> clients = this.multiPlayerGame[searchable];
+            this.multiPlayerGame[searchable].Clear();
+            string msg = "game" + name + "is now closed";
+            foreach (TcpClient c  in clients)
+            {
+                this.c.DataHasChanged(msg, c);
+            }
+            return false;
         }
+
         /*public void Solve(IProblem<T> p)
 {
 throw new NotImplementedException();

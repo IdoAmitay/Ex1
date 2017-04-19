@@ -9,6 +9,6 @@ namespace Ex1
 {
    public interface ICommand
     {
-        string ExecuteCommand(string [] args, TcpClient client = null);
+        bool ExecuteCommand(string [] args, TcpClient client = null);
     }
 }

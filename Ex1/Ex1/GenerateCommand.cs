@@ -15,13 +15,14 @@ namespace Ex1
         {
             this.model = model;
         }
-        public string ExecuteCommand(string[] args, TcpClient client = null)
+        public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
             string name = args[0];
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
             /*SearchAlgorithmsLib.ISearchable<T> searchable =*/
-           return this.model.Generate(name, rows, cols);
+            // return
+            this.model.Generate(name, rows, cols, client);
 
         }
     }

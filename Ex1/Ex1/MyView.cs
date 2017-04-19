@@ -16,7 +16,11 @@ namespace Ex1
         }
         public void GetCommand(string s, TcpClient client)
         {
-            this.c.ExecuteCommand(s, client);
+            //this.c.ExecuteCommand(s, client);
+            if(!this.c.ExecuteCommand(s, client))
+            {
+                client.Close();
+            }
         }
 
         public void ShowResult(string s, TcpClient client)

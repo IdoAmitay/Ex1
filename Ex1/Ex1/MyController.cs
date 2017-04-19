@@ -13,8 +13,10 @@ namespace Ex1
         private IModel m;
         private IView v;
         private Dictionary<string, ICommand> commandList;
+      //  bool continueConnection;
         public MyController()
         {
+           // continueConnection = true;
             commandList = new Dictionary<string, ICommand>();
             commandList.Add("generate", new GenerateCommand(this.m));
             commandList.Add("solve", new SolveCommand(this.m));
@@ -37,7 +39,7 @@ namespace Ex1
         {
             this.v = v;
         }
-        public void ExecuteCommand(string command, TcpClient client)
+        public bool ExecuteCommand(string command, TcpClient client)
         {
             string[] arr = command.Split(' ');
             string commandKey = arr[0];
@@ -45,14 +47,21 @@ namespace Ex1
             {
                 //return not found
                 this.v.ShowResult("Command not Found",client);
+                return false;
             }
             else
             {
                 string[] args = arr.Skip(1).ToArray();
                 ICommand com = commandList[commandKey];
-                string result = com.ExecuteCommand(args, client);
-                this.v.ShowResult(result,client);
+                /*string result = */
+               return com.ExecuteCommand(args, client);
+               // this.v.ShowResult(result,client);
             }
+        }
+
+        public void DataHasChanged(string data, TcpClient client)
+        {
+            this.v.ShowResult(data,client);
         }
     }
 }

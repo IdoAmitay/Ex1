@@ -11,6 +11,7 @@ namespace Ex1
     {
          void SetModel(IModel m);
          void SetView(IView v);
-        void ExecuteCommand(string command, TcpClient client);
+        bool ExecuteCommand(string command, TcpClient client);
+        void DataHasChanged(string data, TcpClient client);
     }
 }
