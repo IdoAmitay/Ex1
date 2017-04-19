@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,14 +14,14 @@ namespace Ex1
         {
             this.c = c;
         }
-        public void GetCommand(string s)
+        public void GetCommand(string s, TcpClient client)
         {
-            throw new NotImplementedException();
+            this.c.ExecuteCommand(s, client);
         }
 
-        public void ShowResult(string s)
+        public void ShowResult(string s, TcpClient client)
         {
-            throw new NotImplementedException();
+            //////////////////////////////////////////
         }
     }
 }

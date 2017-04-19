@@ -19,6 +19,8 @@ namespace Ex1
         public void HandleClient(TcpClient client)
         {
             
+
+            
             new Task(() =>
             {
                 using (NetworkStream stream = client.GetStream())

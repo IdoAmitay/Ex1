@@ -37,21 +37,21 @@ namespace Ex1
         {
             this.v = v;
         }
-        void ExecuteCommand(string command, TcpClient client)
+        public void ExecuteCommand(string command, TcpClient client)
         {
             string[] arr = command.Split(' ');
             string commandKey = arr[0];
             if (!commandList.ContainsKey(commandKey))
             {
                 //return not found
-                this.v.ShowResult("Command not Found");
+                this.v.ShowResult("Command not Found",client);
             }
             else
             {
                 string[] args = arr.Skip(1).ToArray();
                 ICommand com = commandList[commandKey];
                 string result = com.ExecuteCommand(args, client);
-                this.v.ShowResult(result);
+                this.v.ShowResult(result,client);
             }
         }
     }
