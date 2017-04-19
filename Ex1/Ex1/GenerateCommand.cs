@@ -22,7 +22,7 @@ namespace Ex1
             int cols = int.Parse(args[2]);
             /*SearchAlgorithmsLib.ISearchable<T> searchable =*/
             // return
-            this.model.Generate(name, rows, cols, client);
+            return this.model.Generate(name, rows, cols, client);
 
         }
     }

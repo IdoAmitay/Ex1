@@ -14,13 +14,13 @@ namespace Ex1
         {
             this.c = c;
         }
-        public void GetCommand(string s, TcpClient client)
+        public bool GetCommand(string s, TcpClient client)
         {
-            //this.c.ExecuteCommand(s, client);
-            if(!this.c.ExecuteCommand(s, client))
+            return this.c.ExecuteCommand(s, client);
+           /* if(!this.c.ExecuteCommand(s, client))
             {
                 client.Close();
-            }
+            }*/
         }
 
         public void ShowResult(string s, TcpClient client)

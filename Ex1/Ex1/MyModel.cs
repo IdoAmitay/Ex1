@@ -207,7 +207,7 @@ namespace Ex1
                 y1 = int.Parse(arr[1].Split(')')[0]);
 
 
-                while (solutionList.Count >0)
+                while (solutionList.Count > 0)
                 {
                     state = solutionList.Last().ToString();
                     arr = state.Split(',');
@@ -234,7 +234,7 @@ namespace Ex1
                     x1 = x2;
                     y1 = y2;
                 }
-                singleGameMaze.Add(getMazeByName(name), );
+                singleGameMaze.Add(getMazeByName(name), solutionStr);
                 JObject solutionObject = new JObject();
                 solutionObject["Name"] = name;
                 solutionObject["Solution"] = solutionStr; ;

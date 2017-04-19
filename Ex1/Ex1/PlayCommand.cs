@@ -15,7 +15,7 @@ namespace Ex1
             this.model = model;
         }
 
-        public string ExecuteCommand(string[] args, TcpClient client = null)
+        public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
             int move = int.Parse(args[0]);
             return this.model.play(move, client);
