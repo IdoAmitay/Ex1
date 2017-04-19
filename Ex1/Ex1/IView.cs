@@ -9,7 +9,7 @@ namespace Ex1
 {
    public interface IView
     {
-        void GetCommand(string s, TcpClient client);
+        bool GetCommand(string s, TcpClient client);
         void ShowResult(string s, TcpClient client);
     }
 }
