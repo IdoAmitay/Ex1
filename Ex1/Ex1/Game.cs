@@ -8,7 +8,7 @@ using SearchAlgorithmsLib;
 
 namespace Ex1
 {
-    public class Game<T> : IProblem<T>
+    public abstract class Game<T> : IProblem<T>
     {
         protected SearchAlgorithmsLib.ISearchable<T> searchable { get; set; }
         protected List<TcpClient> clients { get; set; }

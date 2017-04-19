@@ -14,12 +14,12 @@ namespace Ex1
         {
             this.model = model;
         }
-        public void ExecuteCommand(string[] args, TcpClient client = null)
+        public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
             string name = args[0];
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
-            this.model.Start(name, rows, cols, client);
+          return   this.model.Start(name, rows, cols, client);
         }
     }
 }

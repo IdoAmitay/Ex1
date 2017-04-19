@@ -95,7 +95,7 @@ namespace Ex1
         {
             return this.maze.Name;
         }
-        public string ToString()
+        public override string ToString()
         {
             return this.maze.ToJSON();
         }

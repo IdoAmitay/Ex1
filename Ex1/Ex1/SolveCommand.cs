@@ -14,11 +14,11 @@ namespace Ex1
         {
             this.model = model;
         }
-        public void ExecuteCommand(string[] args, TcpClient client = null)
+        public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
             string name = args[0];
             int algorithm = int.Parse(args[1]);
-            this.model.Solve(name, algorithm);
+           return  this.model.Solve(name, algorithm,client);
         }
     }
 }

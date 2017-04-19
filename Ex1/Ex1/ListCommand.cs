@@ -15,9 +15,9 @@ namespace Ex1
             this.model = m;
         }
 
-        public void ExecuteCommand(string[] args, TcpClient client = null)
+        public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
-            this.model.List();
+           return this.model.List(client);
         }
     }
 }

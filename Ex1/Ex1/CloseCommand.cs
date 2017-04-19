@@ -14,10 +14,10 @@ namespace Ex1
         {
             this.model = model;
         }
-        public void ExecuteCommand(string[] args, TcpClient client = null)
+        public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
             string name = args[0];
-            this.model.close(name);
+            return this.model.close(name,client);
         }
     }
 }
