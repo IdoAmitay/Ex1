@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -11,16 +12,20 @@ namespace Ex1
     {
         static void Main(string[] args)
         {
+            
+            int p = int.Parse(ConfigurationManager.AppSettings["port"].ToString());
             IController controller = new MyController();
             IModel model = new MyModel<MazeLib.Position>(controller);
             
             ClientHandler ch = new ClientHandler(controller);
             controller.SetModel(model);
             controller.SetView(ch);
-            Client client = new Client();
-            Server server = new Server(8000, ch);
+            Server server = new Server(p, ch);
             server.Start();
-            client.sendCommand("Generate");
+            Client client = new Client();
+            /*string str = Console.ReadLine();
+            client.sendCommand(str);*/
+           // server.Stop();
         }
     }
 }

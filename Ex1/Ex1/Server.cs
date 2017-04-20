@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -11,6 +12,7 @@ namespace Ex1
     class Server
     {
         private int port;
+        string s = ConfigurationManager.AppSettings["server"].ToString();
         private TcpListener listener;
         private IClientHandler ch;
         //private Task task;
@@ -21,8 +23,10 @@ namespace Ex1
         }
         public void Start()
         {
-            IPEndPoint ep = new
-           IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(s), port);
+            //IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+
+
             listener = new TcpListener(ep);
 
             listener.Start();

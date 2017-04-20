@@ -13,8 +13,8 @@ namespace Ex1
     {
         // private IView v;
         private NetworkStream stream;
-        StreamReader reader;
-        StreamWriter writer;
+       private  StreamReader reader;
+        private StreamWriter writer;
         private bool continueConnection;
         private IController c;
         /*public ClientHandler (IView v)
@@ -31,24 +31,42 @@ namespace Ex1
         public void HandleClient(TcpClient client)
         {
 
-
+           // this.stream = client.GetStream();
+          //  this.reader = new StreamReader(stream);
+            //this.writer = new StreamWriter(stream);
 
             new Task(() =>
             {
-            /* using (NetworkStream stream = client.GetStream())
-             using (StreamReader reader = new StreamReader(stream))
-             using (StreamWriter writer = new StreamWriter(stream))*/
-            this.stream = client.GetStream();
-            this.reader = new StreamReader(stream);
-            this.writer = new StreamWriter(stream);
-                    while (continueConnection)
+
+                NetworkStream stream = client.GetStream();
+              StreamReader reader = new StreamReader(stream);
+                StreamWriter writer = new StreamWriter(stream);
+           
+                   
                 {
-                    string commandLine = reader.ReadLine();
-                    //Console.WriteLine("Got command: {0}", commandLine);
-                    /*string result =*/
-                    // this.v.GetCommand(commandLine, client);
-                    //writer.Write(result);
-                    continueConnection =  GetCommand(commandLine, client);
+                    while (continueConnection)
+                    {
+                        try
+                        {
+                            string commandLine = reader.ReadLine();
+
+                            Console.WriteLine("Got command: {0}", commandLine);
+                            /*string result =*/
+                            // this.v.GetCommand(commandLine, client);
+                            //writer.Write(result);
+                            continueConnection = this.c.ExecuteCommand(commandLine, client);
+                            Console.WriteLine(continueConnection);
+                            /*GetCommand(commandLine, client)*/
+                        }
+                        catch(SocketException)
+                        {
+                            break;
+                        }
+
+
+
+                    }
+
                 }
                 
 
@@ -68,7 +86,8 @@ namespace Ex1
         public void ShowResult(string s, TcpClient client)
         {
             //////////////////////////////////////////
-            writer.Write(s);
+            //writer.Write(s);
+            Console.WriteLine(s);
         }
     }
 }
