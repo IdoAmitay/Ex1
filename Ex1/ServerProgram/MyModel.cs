@@ -7,7 +7,7 @@ using SearchAlgorithmsLib;
 using System.Net.Sockets;
 using Newtonsoft.Json.Linq;
 
-namespace Ex1
+namespace ServerProgram
 {
     public class MyModel<T> : IModel
     {

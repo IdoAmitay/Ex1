@@ -5,19 +5,19 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex1
+namespace ServerProgram
 {
-    class JoinCommand : ICommand
+    public class CloseCommand : ICommand
     {
-        private IModel model;
-        public JoinCommand(IModel model)
+        IModel model;
+        public CloseCommand(IModel model)
         {
             this.model = model;
         }
         public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
             string name = args[0];
-           return  this.model.Join(name,client);
+            return this.model.close(name,client);
         }
     }
 }

@@ -5,20 +5,21 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex1
+namespace ServerProgram
 {
-    class SolveCommand: ICommand
+    class StartCommand : ICommand
     {
         private IModel model;
-        public SolveCommand(IModel model)
+        public StartCommand(IModel model)
         {
             this.model = model;
         }
         public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
             string name = args[0];
-            int algorithm = int.Parse(args[1]);
-           return  this.model.Solve(name, algorithm,client);
+            int rows = int.Parse(args[1]);
+            int cols = int.Parse(args[2]);
+          return   this.model.Start(name, rows, cols, client);
         }
     }
 }

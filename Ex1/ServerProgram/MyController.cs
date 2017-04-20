@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Ex1
+namespace ServerProgram
 {
     public class MyController : IController
     {

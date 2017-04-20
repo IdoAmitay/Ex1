@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MazeLib;
 using SearchAlgorithmsLib;
 
-namespace Ex1
+namespace ServerProgram
 {
     public class MazeAdapter : SearchAlgorithmsLib.ISearchable<MazeLib.Position>
     {

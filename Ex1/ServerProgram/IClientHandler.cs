@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace Ex1
+namespace ServerProgram
 {
     public interface IClientHandler
     {

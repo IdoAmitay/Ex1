@@ -5,21 +5,19 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex1
+namespace ServerProgram
 {
-    class StartCommand : ICommand
+   public class ListCommand:ICommand
     {
         private IModel model;
-        public StartCommand(IModel model)
+        public ListCommand(IModel m)
         {
-            this.model = model;
+            this.model = m;
         }
+
         public bool ExecuteCommand(string[] args, TcpClient client = null)
         {
-            string name = args[0];
-            int rows = int.Parse(args[1]);
-            int cols = int.Parse(args[2]);
-          return   this.model.Start(name, rows, cols, client);
+           return this.model.List(client);
         }
     }
 }

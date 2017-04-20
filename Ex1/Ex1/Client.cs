@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Ex1
+namespace ClientProgram
 {
     class Client
     {
